@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <style>
+        #theBtn{
+            width: 100%;
+            height: 200px;
+        }
+    input {
+        font-size:50px;
+        width: 300px;
+        height: 200px;
+        /*margin: 100px 300px 200px 500px;*/
+    }
+        #theShow{
+            padding: 20px;
+            font-size: 20px;
+            text-align: center;
+            width: 100%;
+            height: 600px;
+            border: 1px solid black;
+        }
+    </style>
+    <script src="./javascripts/jquery.js"></script>
+    <title></title>
+</head>
+<body>
+<div id="theBtn">
+    <!-- 点击不同的 按钮，会发出不同的请求 -->
+    <input type="button" value="GET" id="theGet"/>
+    <input type="button" value="POST" id="thePost"/>
+</div>
+
+<div id="theShow"></div>
+<script>
+    $(function () {
+//         当我 点击 theGet 的按钮的时候，---》 发出一个请求
+//         进入到服务器
+        $("#theGet").click(function () {
+            $.ajax({
+                url: '/VueHandler/CourseHandler?action=getcategory',
+                // 请求的地址   我对服务器 发出的请求 是 url   if(req.query.action=='verification')
+                type:"GET",  // 请求方式
+                async:false,  // 同步 异步
+                data:{
+//              几乎  即使有 他也会被当做参数 放在 url地址后面
+//                    分页   我就要查看 第一页数据是什么样子
+//                    searchText:'',
+//                    pageStart:'1'
+//                    yanzheng:'5678'
+//                    tokenId:1
+                },
+                success: function (data) {
+//                    我拿到了请求的 数据了
+                    $("#theShow").html(data);   // --> id  data
+                    var msg = eval('('+data+')');  // json
+                    if(msg.success)
+                    {
+                        alert(1);
+                        // window.location = "Test_courseShow.html";
+                    }
+                }
+            })
+        });
+        $("#thePost").click(function () {
+            $.ajax({  // /VueHandler/AdminLoginAndRegHandler?action=add
+                url: '/VueHandler/VideoHandler?action=update',
+                type:"POST",
+                async:false,
+                data:{
+//                    放置的就是 要去发送的 请求数据
+//                    userName:'admin',
+////     首先是后台编辑  如果前端给我发送一个这样的字段userName3333  password trueName
+//                    password:'123456',
+//                    tureName:'葫芦娃',
+//                    phone:'12312312312',
+//                    power:'系统管理人员'
+//                    登录功能   --》 前端 都要去发送什么数据
+//                     userName:'admin110',
+//                    password:'123456'
+//                    更新操作
+//                    'tokenId':1,
+//                    'userName':'admin110',
+//                    'tureName':'qqqq',
+//                    'phone':'11111111111',
+//                    'power':'课程管理人员'
+//                    修改密码
+//                    'userPwd':'123456',
+//                    'newPwd':'654321'
+//            /VueHandler/AdminHandler?action=adduser  添加学员这里 发送数据到后台
+//                      'addemail':'121545648@qq.com',
+//                      'addphone':'12345678977',
+//                      'userName':'天线宝宝',
+//                    'dsc':'炼狱级小学生'
+
+//                    添加视频操作
+//                    Vname:'测试视频',
+//                    Vtime:'1',
+//                    Vurl:'左转直行100，右转到家了！'
+                    ID:1,
+                    Vname:'sexy烈焰红唇',
+                    Vtime:'998',
+                    Vurl:'成都校区，苏老师出品！'
+
+                },
+                success: function (data) {
+                    $("#theShow").html(data);
+                    var msg = eval('(' + data + ')');
+                    if(msg.success)
+                    {
+                        alert(1);
+                        //window.location = "Test_courseShow.html";
+                    }
+                }
+            })
+
+        });
+    })
+
+// 预加载 外面*****************************************************
+
+//    $.ajax({   // 放在了预加载外面 ---》页面加载就会发起请求  生成一组验证码
+//        url: '/VueHandler/AdminLoginAndRegHandler?action=login',
+//        // 请求的地址   我对服务器 发出的请求 是 url   if(req.query.action=='verification')
+//        type:"POST",  // 请求方式
+//        async:false,  // 同步 异步
+//        data:{
+//            userName:'admin',
+//            password:'123456'
+//
+//        },
+//        success: function (data) {
+////                    我拿到了请求的 数据了
+//
+//           console.log(data);
+//        }
+//    })
+
+
+
+
+
+
+
+//     预加载 外面
+
+//    $.ajax({
+//        url: '',
+//        type:"POST",
+//        async:false,
+//        data:{
+//
+//
+//        },
+//        success: function (data) {
+//            $("#theShow").html(data);
+////            var msg = eval('(' + data + ')');
+////            if(msg.success)
+////            {
+////                alert(1);
+////                //window.location = "Test_courseShow.html";
+////            }
+//        }
+//    });
+
+
+
+
+
+</script>
+</body>
+</html>
